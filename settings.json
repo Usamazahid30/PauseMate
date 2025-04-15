@@ -1,0 +1,5 @@
+{
+  "blockIntervalMinutes": 20,
+  "blockDurationSeconds": 20,
+  "enabled": true
+}

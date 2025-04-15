@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>PauseMate Settings</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        padding: 20px;
+      }
+      label {
+        display: block;
+        margin-top: 10px;
+      }
+      input {
+        width: 100%;
+        padding: 5px;
+        margin-top: 5px;
+      }
+      button {
+        margin-top: 20px;
+        padding: 10px;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>PauseMate Settings</h2>
+    <label>
+      Block Interval (minutes):
+      <input type="number" id="interval" min="1" />
+    </label>
+
+    <label>
+      Block Duration (seconds):
+      <input type="number" id="duration" min="1" />
+    </label>
+
+    <label>
+      <input type="checkbox" id="enabled" />
+      Enable PauseMate
+    </label>
+
+    <button id="saveBtn">Save Settings</button>
+
+    <script src="renderer.js"></script>
+    <script>
+      const { ipcMain } = require("electron");
+
+      ipcMain.on("update-settings", (event, newSettings) => {
+        settings = { ...settings, ...newSettings };
+        fs.writeFileSync(settingsPath, JSON.stringify(settings, null, 2));
+        if (settings.enabled) startTimer();
+      });
+    </script>
+  </body>
+</html>
