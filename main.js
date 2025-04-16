@@ -8,7 +8,17 @@ let settingsPath = path.join(__dirname, "settings.json");
 const logFilePath = path.join(__dirname, "app.log");
 
 function logEvent(message) {
-  const timestamp = new Date().toISOString();
+  const timestamp = new Intl.DateTimeFormat("en-US", {
+    timeZone: "Asia/Karachi",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: false,
+  }).format(new Date());
+
   const logMessage = `[${timestamp}] ${message}\n`;
   fs.appendFileSync(logFilePath, logMessage, "utf8");
 }
