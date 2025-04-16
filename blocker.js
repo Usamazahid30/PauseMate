@@ -119,6 +119,11 @@ function showBlockScreen(duration) {
     `)
   );
 
+  blockWindow.once("ready-to-show", () => {
+    blockWindow.show();
+    blockWindow.focus();
+  });
+
   blockWindow.on("closed", () => {
     blockWindow = null;
   });
