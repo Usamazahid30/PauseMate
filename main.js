@@ -2,6 +2,7 @@ const { app, Tray, Menu, BrowserWindow, Notification } = require("electron");
 const path = require("path");
 const fs = require("fs");
 const { showBlockScreen } = require("./blocker");
+app.disableHardwareAcceleration();
 
 let tray;
 let settingsPath = path.join(__dirname, "settings.json");
@@ -59,6 +60,7 @@ function startTimer() {
     if (settings.enabled) {
       notifyBreak(); // Notify the user
       setTimeout(() => {
+        app.focus();
         showBlockScreen(settings.blockDurationSeconds);
         logEvent("Block screen displayed.");
       }, 5000); // Show blocker screen after 5 seconds
